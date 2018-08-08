@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LinkedList
 {
     //Non-Generic LinkedList
-    class LinkedList
+    public class LinkedList
     {
         public LinkedList()
         {
@@ -34,8 +34,10 @@ namespace LinkedList
         {
             if (Count <= 0)
             {
-                throw new Exception("There are no elements to remove");
+                //throw new Exception("There are no elements to remove");
+                return;
             }
+            
 
             Head.Next = Head.Next.Next;
             --Count;
@@ -43,23 +45,28 @@ namespace LinkedList
 
         public void PrintAllNodes()
         {
-            Console.Write("Head -> ");
+            Console.WriteLine(this.ToString());
+        }
+
+        public override string ToString()
+        {
+            var stringBuilder = new StringBuilder();
+            stringBuilder.Append("Head -> ");
             Node curr = Head;
             while (curr.Next != null)
             {
                 curr = curr.Next;
-                Console.Write(curr.Value); //If using a reference type (any class/interface), you will need to override ToString for this to work.
-                Console.Write(" -> ");
+                stringBuilder.Append(curr.Value); //If using a reference type (any class/interface), you will need to override ToString for this to work.
+                stringBuilder.Append(" -> ");
             }
-            Console.Write("NULL");
-            Console.WriteLine();
+            stringBuilder.Append("NULL");
+            //stringBuilder.AppendLine();
+            return stringBuilder.ToString();
         }
-
-
     }
 
     //Linked List using Generics
-    class LinkedList<T> where T : class
+    public class LinkedList<T> where T : class
     {
         public LinkedList()
         {
